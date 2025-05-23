@@ -2,6 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Arabic font */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
+
+/* RTL utilities */
+@layer utilities {
+  .rtl {
+    direction: rtl;
+  }
+
+  .ltr {
+    direction: ltr;
+  }
+
+  .text-start-rtl {
+    text-align: start;
+  }
+
+  .text-end-rtl {
+    text-align: end;
+  }
+
+  /* RTL-specific spacing */
+  .mr-rtl {
+    margin-right: 0.25rem;
+  }
+
+  .ml-rtl {
+    margin-left: 0.25rem;
+  }
+
+  .pr-rtl {
+    padding-right: 0.25rem;
+  }
+
+  .pl-rtl {
+    padding-left: 0.25rem;
+  }
+}
+
+/* Arabic font support */
+[dir="rtl"] {
+  font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Ensure input text aligns properly in RTL */
+[dir="rtl"] input[type="text"],
+[dir="rtl"] input[type="number"],
+[dir="rtl"] textarea {
+  text-align: right;
+}
+
+/* Reverse animations for RTL */
+[dir="rtl"] .animate-fade-in {
+  animation: fade-in-rtl 0.5s ease-out;
+}
+
+@keyframes fade-in-rtl {
+  0% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

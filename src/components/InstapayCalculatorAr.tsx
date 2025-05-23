@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AmountInput from "./AmountInput";
-import FeeInfoCard from "./FeeInfoCard";
-import FeeDetails from "./FeeDetails";
-import InstapayHeader from "./InstapayHeader";
+import AmountInputAr from "./AmountInputAr";
+import FeeInfoCardAr from "./FeeInfoCardAr";
+import FeeDetailsAr from "./FeeDetailsAr";
+import InstapayHeaderAr from "./InstapayHeaderAr";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +12,7 @@ const MIN_FEE = 0.5;
 const MAX_FEE = 20;
 const FEE_RATE = 0.001; // 0.1%
 
-const InstapayCalculator = () => {
+const InstapayCalculatorAr = () => {
   const navigate = useNavigate();
   const [amountStr, setAmountStr] = useState("");
   const [amount, setAmount] = useState(0);
@@ -22,10 +21,10 @@ const InstapayCalculator = () => {
   const [isValid, setIsValid] = useState(true);
 
   const handleLanguageChange = (lang: 'en' | 'ar') => {
-    if (lang === 'ar') {
-      navigate('/ar');
-    } else {
+    if (lang === 'en') {
       navigate('/');
+    } else {
+      navigate('/ar');
     }
   };
 
@@ -54,41 +53,40 @@ const InstapayCalculator = () => {
     setFee(calculatedFee);
     setTotalAmount(parsedAmount + calculatedFee);
   }, [amountStr]);
-
   return (
     <div className={cn(
       "min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100",
       "flex flex-col items-center px-4 py-10 md:py-16"
-    )}>
-      <LanguageSwitcher currentLang="en" onLanguageChange={handleLanguageChange} />
+    )} dir="rtl">
+      <LanguageSwitcher currentLang="ar" onLanguageChange={handleLanguageChange} />
       
       <div className="w-full max-w-md">
-        <InstapayHeader />
+        <InstapayHeaderAr />
         
         <div className="space-y-6">
-          <AmountInput 
+          <AmountInputAr 
             value={amountStr}
             onChange={setAmountStr}
             isValid={isValid}
           />
           
-          <FeeInfoCard 
+          <FeeInfoCardAr 
             amount={amount}
             fee={fee}
             totalAmount={totalAmount}
             isValid={isValid}
           />
           
-          <FeeDetails />
+          <FeeDetailsAr />
         </div>
         
-        <footer className="mt-10 text-center text-xs text-indigo-500">
-          <p>© 2025 Instapay Fee Calculator</p>
-          <p className="mt-1">Not affiliated with the official Instapay service</p>
+        <footer className="mt-10 text-center text-xs text-indigo-500" dir="rtl">
+          <p>© 2025 حاسبة رسوم إنستاباي</p>
+          <p className="mt-1">غير مرتبط بخدمة إنستاباي الرسمية</p>
         </footer>
       </div>
     </div>
   );
 };
 
-export default InstapayCalculator;
+export default InstapayCalculatorAr;
